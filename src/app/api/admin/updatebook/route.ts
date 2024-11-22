@@ -4,11 +4,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 connect();
 
-export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
-    const { id } = params;
+export async function POST(request: NextRequest) {
     const reqBody = await request.json();
+    const id = reqBody.id;
+    const body = reqBody.data
     try {
-        const updatedBook = await Book.findByIdAndUpdate(id, reqBody, { new: true });
+        const updatedBook = await Book.findByIdAndUpdate(id, body, { new: true });
         if (!updatedBook) {
             return NextResponse.json({ message: "Book not found" }, { status: 404 });
         }

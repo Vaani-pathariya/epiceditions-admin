@@ -4,10 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 connect();
 
-export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
-    const { id } = params;
+export async function POST(request: NextRequest) {
     try {
-        const result = await Book.findByIdAndDelete(id);
+        const body = await request.json()
+        const result = await Book.findByIdAndDelete(body.id);
         if (!result) {
             return NextResponse.json({ message: "Book not found" }, { status: 404 });
         }
