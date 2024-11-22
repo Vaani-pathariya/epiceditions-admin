@@ -9,8 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily:{
-        lora:['Lora','serif'],
-        montserrat: ['Montserrat', 'sans-serif'],
+        cookie:["Cookie", 'cursive'],
+        poppins :["Poppins", "sans-serif"]
+      },
+      colors:{
+        charcoal : "#2E4052",
+        brightPink: "#E76B74",
+        lightYellow: "#F8FFE5",
+        chocolate :"#550C18",
       }
     },
   },

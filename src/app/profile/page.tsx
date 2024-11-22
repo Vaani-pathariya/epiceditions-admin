@@ -1,6 +1,7 @@
 "use client"
 import axios from "axios"
 import { useRouter } from "next/navigation";
+import Logo from "../_components/Logo";
 
 export default function Profile (){
     const router = useRouter();
@@ -13,8 +14,9 @@ export default function Profile (){
         }
     }
     return(
-        <div>
-            <button onClick={logout}>Logout</button>
+        <div className="text-center">
+            <Logo/>
+            <button onClick={logout} className="bg-chocolate text-white p-2 m-1 rounded-md">Logout</button>
         </div>
     )
 }

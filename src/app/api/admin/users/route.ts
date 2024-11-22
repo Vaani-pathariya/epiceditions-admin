@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 connect();
 export async function POST(request: NextRequest) {
   try {
-    const users = await User.find();
+    const users = await User.find({role:'User'},"username email createdOn status");
     return NextResponse.json({
       message: "Data shared successfully",
       success: true,
@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     });
   } catch (error: any) {
     return NextResponse.json(
-      { message: "Error getting books" },
+      { message: "Error getting users" },
       { status: 500 }
     );
   }
