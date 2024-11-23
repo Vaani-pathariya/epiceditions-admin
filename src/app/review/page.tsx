@@ -37,6 +37,7 @@ const Review = () => {
         })
         .catch((error) => {
           console.log("Error deleting book review:", error);
+          throw new Error("Error")
         }),
       {
         loading: "Delete request initiated",
@@ -57,6 +58,7 @@ const Review = () => {
         })
         .catch((error) => {
           console.log("Error updating book review:", error);
+          throw new Error("Error")
         }),
       {
         loading: "Update request initiated",
@@ -80,9 +82,14 @@ const Review = () => {
         const response = await axios.post("/api/admin/readbook/", {
           id,
         });
+        if(!response.data.success){
+          router.push("/")
+        }
+        else{
         setData(response.data.data);
-        setUpdatedData(response.data.data); // Prefill form with existing data
+        setUpdatedData(response.data.data); 
         setError("");
+        }
       } catch (err) {
         console.error("Error fetching data:", err);
         setError("Failed to fetch data. Please try again.");

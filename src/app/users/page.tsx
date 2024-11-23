@@ -2,15 +2,17 @@
 import { useEffect, useState } from "react";
 import Logo from "../_components/Logo";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function Users() {
   const [users, setUsers] = useState<any[]>([]);
-
+  const router = useRouter();
   useEffect(() => {
     const gettingUsers = async () => {
       try {
-        const response = await axios.get("/api/admin/users");
-        setUsers(response.data); // Use response.data to access the actual data
+        const response = await axios.post("/api/admin/users");
+        if (!response.data.success) router.push("/");
+        else setUsers(response.data.data); // Use response.data to access the actual data
       } catch (error) {
         console.log("Error loading data: ", error);
       }

@@ -1,13 +1,21 @@
 import { connect } from "@/dbConfig/dbConfig";
 import Book from "@/models/bookModel";
 import { NextRequest, NextResponse } from "next/server";
-
+import { verifyToken } from "@/helpers/verifyToken";
 // Ensure database connection
 connect();
 
 export async function POST(request: NextRequest) {
   try {
     // Parse request body
+    const token = request.cookies.get("token");
+    const {valid,decoded,error}= await verifyToken(token);
+    if(!valid){
+      return NextResponse.json({
+        message: "User not verified",
+        success:false 
+      },{status: 500});
+    }
     const reqBody = await request.json();
     const {
       name,

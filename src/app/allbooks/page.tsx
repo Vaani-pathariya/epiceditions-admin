@@ -3,16 +3,21 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Logo from "../_components/Logo";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Allbooks() {
     const [books, setBooks] = useState<any[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-
+    const router = useRouter();
     useEffect(() => {
         const gettingData = async () => {
             try {
                 const response = await axios.post("/api/admin/allbookdetails", {});
+                if(!response.data.success){
+                    router.push("/");
+                }
+                else 
                 setBooks(response.data.data);
             } catch (error: any) {
                 setError("Error encountered while fetching books.");

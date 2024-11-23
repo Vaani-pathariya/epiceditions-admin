@@ -32,6 +32,7 @@ export default function Book() {
         console.log(response.data.message);
       }).catch((error)=>{
         console.log("Book review saving failed",error.message);
+        throw new Error("Error")
       }),{
       loading :"Initiated book review request",
       success:"Book review saved successfully",

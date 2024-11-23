@@ -30,6 +30,7 @@ export default function login() {
         })
         .catch((error) => {
           console.log("Login failed", error.message);
+          throw new Error("")
         })
         .finally(() => {
           setLoading(false);
